@@ -1,0 +1,16 @@
+langchain>=0.2.15
+langchain-core>=0.2.30
+langchain-community>=0.2.10
+langchain-openai>=0.1.7
+langchain-chroma>=0.1.2
+langchain-text-splitters>=0.2.2
+
+chromadb>=0.5.3
+
+
+pypdf>=4.2.0         
+docx2txt>=0.8      
+
+
+openai>=1.40.0
+python-dotenv>=1.0.0

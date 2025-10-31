@@ -1,0 +1,14 @@
+# Ignore virtual environment
+venv/
+.env
+
+# Ignore vectorstore and cache files
+kb/
+chroma/
+__pycache__/
+*.pkl
+*.db
+
+# Ignore temp data and OS files
+.DS_Store
+Thumbs.db
