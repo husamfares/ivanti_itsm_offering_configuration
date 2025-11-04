@@ -1,0 +1,22 @@
+{
+  "groups": {
+    "NETWORK_TEAM_GROUP_RECID": "4F07C98B-12A9-4E1C-8C7D-74A92F6D9D22"
+  },
+  "email_templates": {
+    "on_submission": "RO_Submission_Template",
+    "on_approval": "RO_Approval_Template",
+    "on_rejection": "RO_Rejection_Template",
+    "notify_approvers": "Network_Port_Approval_Template"
+  },
+  "statuses": {
+    "submitted": "Submitted",
+    "waiting_for_approval": "Waiting for Approval",
+    "approved": "Approved",
+    "rejected": "Approval Rejected",
+    "completed": "Completed"
+  },
+  "catalog": {
+    "category": "Network Services",
+    "publishing_mode": "all_users"
+  }
+}

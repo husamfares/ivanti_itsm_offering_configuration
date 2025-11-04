@@ -1,0 +1,17 @@
+{
+  "offering_followups": {
+    "followup_used": false,
+    "why": "parse_error",
+    "followups": []
+  },
+  "fields_followups": {
+    "followup_used": false,
+    "why": "parse_error",
+    "followups": []
+  },
+  "workflow_followups": {
+    "followup_used": false,
+    "why": "parse_error",
+    "followups": []
+  }
+}

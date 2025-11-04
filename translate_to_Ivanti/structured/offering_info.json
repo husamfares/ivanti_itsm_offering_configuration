@@ -1,0 +1,19 @@
+{
+  "catalog_item_name": "Enable/Disable Network Point",
+  "description": "",
+  "category": "",
+  "delivery_target_days": 1,
+  "user_permissions": {
+    "can_cancel": true,
+    "can_edit": true
+  },
+  "publishing_scope": {
+    "mode": "all_users",
+    "groups": [],
+    "users": []
+  },
+  "missing_fields": [
+    "description",
+    "category"
+  ]
+}

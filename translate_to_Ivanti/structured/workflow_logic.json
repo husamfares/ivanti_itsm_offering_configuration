@@ -1,0 +1,279 @@
+{
+  "blocks": [
+    {
+      "id": "B1",
+      "type": "start",
+      "title": "Start",
+      "properties": {},
+      "exits": [
+        {
+          "title": "ok",
+          "condition": ""
+        }
+      ]
+    },
+    {
+      "id": "B2",
+      "type": "notification",
+      "title": "notify_submission",
+      "properties": {},
+      "exits": [
+        {
+          "title": "ok",
+          "condition": ""
+        }
+      ]
+    },
+    {
+      "id": "B3",
+      "type": "update",
+      "title": "Update Waiting for Approval",
+      "properties": {
+        "status": "Waiting for Approval"
+      },
+      "exits": [
+        {
+          "title": "ok",
+          "condition": ""
+        }
+      ]
+    },
+    {
+      "id": "B4",
+      "type": "vote0007",
+      "title": "Line Manager Approval",
+      "properties": {
+        "approvers": {
+          "mode": "related_manager",
+          "relation": "line_manager"
+        }
+      },
+      "exits": [
+        {
+          "title": "approved",
+          "condition": ""
+        },
+        {
+          "title": "denied",
+          "condition": ""
+        },
+        {
+          "title": "cancelled",
+          "condition": ""
+        },
+        {
+          "title": "timedout",
+          "condition": ""
+        },
+        {
+          "title": "noapprovers",
+          "condition": ""
+        }
+      ]
+    },
+    {
+      "id": "B5",
+      "type": "vote0007",
+      "title": "IT Group Approval",
+      "properties": {
+        "approvers": {
+          "mode": "group",
+          "group_recid": "<GROUP_REC_ID_IT_KNOWLEDGE>"
+        }
+      },
+      "exits": [
+        {
+          "title": "approved",
+          "condition": ""
+        },
+        {
+          "title": "denied",
+          "condition": ""
+        },
+        {
+          "title": "cancelled",
+          "condition": ""
+        },
+        {
+          "title": "timedout",
+          "condition": ""
+        },
+        {
+          "title": "noapprovers",
+          "condition": ""
+        }
+      ]
+    },
+    {
+      "id": "B6",
+      "type": "update",
+      "title": "Update Approved",
+      "properties": {
+        "status": "Approved"
+      },
+      "exits": [
+        {
+          "title": "ok",
+          "condition": ""
+        }
+      ]
+    },
+    {
+      "id": "B7",
+      "type": "notification",
+      "title": "notify_approval",
+      "properties": {},
+      "exits": [
+        {
+          "title": "ok",
+          "condition": ""
+        }
+      ]
+    },
+    {
+      "id": "B8",
+      "type": "stop",
+      "title": "Stop",
+      "properties": {}
+    },
+    {
+      "id": "B9",
+      "type": "update",
+      "title": "Update Approval Rejected",
+      "properties": {
+        "status": "Approval Rejected"
+      },
+      "exits": [
+        {
+          "title": "ok",
+          "condition": ""
+        }
+      ]
+    },
+    {
+      "id": "B10",
+      "type": "notification",
+      "title": "notify_rejection",
+      "properties": {},
+      "exits": [
+        {
+          "title": "ok",
+          "condition": ""
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "from": "B1",
+      "exit": "ok",
+      "to": "B2"
+    },
+    {
+      "from": "B2",
+      "exit": "ok",
+      "to": "B3"
+    },
+    {
+      "from": "B3",
+      "exit": "ok",
+      "to": "B4"
+    },
+    {
+      "from": "B4",
+      "exit": "approved",
+      "to": "B5"
+    },
+    {
+      "from": "B5",
+      "exit": "approved",
+      "to": "B6"
+    },
+    {
+      "from": "B6",
+      "exit": "ok",
+      "to": "B7"
+    },
+    {
+      "from": "B7",
+      "exit": "ok",
+      "to": "B8"
+    },
+    {
+      "from": "B4",
+      "exit": "denied",
+      "to": "B9"
+    },
+    {
+      "from": "B4",
+      "exit": "cancelled",
+      "to": "B9"
+    },
+    {
+      "from": "B4",
+      "exit": "timedout",
+      "to": "B9"
+    },
+    {
+      "from": "B4",
+      "exit": "noapprovers",
+      "to": "B9"
+    },
+    {
+      "from": "B9",
+      "exit": "ok",
+      "to": "B10"
+    },
+    {
+      "from": "B10",
+      "exit": "ok",
+      "to": "B8"
+    }
+  ],
+  "notifications": [
+    {
+      "event": "on_submission",
+      "template": "<TEMPLATE_NAME_OR_ID>"
+    },
+    {
+      "event": "on_approval",
+      "template": "<TEMPLATE_NAME_OR_ID>"
+    },
+    {
+      "event": "on_rejection",
+      "template": "<TEMPLATE_NAME_OR_ID>"
+    }
+  ],
+  "status_transitions": [
+    {
+      "from": "submitted",
+      "on": "approved",
+      "to": "Approved"
+    },
+    {
+      "from": "submitted",
+      "on": "denied",
+      "to": "Approval Rejected"
+    },
+    {
+      "from": "submitted",
+      "on": "cancelled",
+      "to": "Approval Rejected"
+    },
+    {
+      "from": "submitted",
+      "on": "timedout",
+      "to": "Approval Rejected"
+    },
+    {
+      "from": "submitted",
+      "on": "noapprovers",
+      "to": "Approval Rejected"
+    }
+  ],
+  "version": "1.0.0",
+  "generated_at": "2025-11-03T12:10:12.894537+00:00",
+  "source_docs": [
+    "Request Offering BRD.docx"
+  ]
+}

@@ -1,4 +1,4 @@
-import os ,shutil, hashlib
+import os , hashlib
 from pathlib import Path
 from dotenv import load_dotenv
 from langchain_community.document_loaders import PyPDFLoader, Docx2txtLoader
