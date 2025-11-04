@@ -1,10 +1,10 @@
-Ivanti ITSM Request Offering Configuration – AI-Assisted Builder
+**Ivanti ITSM Request Offering Configuration – AI-Assisted Builder**
 
 This project automatically extracts a Request Offering (RO) from a Business Requirements Document (BRD) and produces Ivanti-ready JSON files.
 
 
 
-Output Files
+**Output Files**
 File	Description
 workflow_logic.json	Workflow graph (blocks, links, notifications, and status transitions).
 form.json	Internal authoring structure with {"template": ..., "fields": [...]}. Optionally exported in Ivanti naming {"CatalogItem": ..., "FormFields": [...]} using transform_bundle().
@@ -19,7 +19,7 @@ Lightweight validation and normalization logic
 
 
 
-Environment & Requirements
+**Environment & Requirements**
 
 Keep the same dependency versions used during project development:
 
@@ -63,7 +63,7 @@ search_type="mmr" → Maximal Marginal Relevance improves diversity and reduces 
 
 
 
-Core Pipeline (Extractor)
+**Core Pipeline (Extractor)**
 
 The logic is handled inside create_structure_json(...).
 Here’s the simplified flow:
@@ -108,7 +108,7 @@ These are later replaced via tenant_config.json.
 
 
 
-Validation & Export
+**Validation & Export**
 
 Two main scripts handle validation and export.
 
