@@ -14,6 +14,8 @@ def find_placeholders(obj, path="$", hits=None):
     return hits
 
 
+
+# this check every link["from"] and link["to"] points to a real block ID and it is counts outgoing links for each block
 def check_links(blocks, links):
     ids = {b["id"] for b in blocks}
     errors, warnings = [], []
@@ -31,11 +33,16 @@ def check_links(blocks, links):
 
 
 
+
+# here the real replace between the default placeholder with the real one
 def deep_replace(obj, mapping, audit, path="$"):
+
     if isinstance(obj, dict):
         return {k: deep_replace(v, mapping, audit, f"{path}.{k}") for k, v in obj.items()}
+    
     if isinstance(obj, list):
         return [deep_replace(v, mapping, audit, f"{path}[{i}]") for i, v in enumerate(obj)]
+    
     if isinstance(obj, str) and obj.startswith("<") and obj.endswith(">"):
         key = obj.strip("<>")
         if key in mapping:
@@ -43,6 +50,7 @@ def deep_replace(obj, mapping, audit, path="$"):
             return mapping[key]
         else:
             audit.append({"path": path, "old": obj, "new": None, "warning": "unmapped_placeholder"})
+
     return obj
 
 

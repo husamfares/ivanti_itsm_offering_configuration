@@ -33,18 +33,21 @@ def load_input_json(offering_path : str | Path ,
     form = read_json(Path(form_path))
     workflow = read_json(Path(workflow_path))
 
-    # Optional: separate fields json (if your pipeline ever splits it)
+
+    # this checks for validate the structures of json files like fields have all fields and form have the offering and fields and workflow ...
+    # If missing -> this means the generated JSON is broken.
     if fields_path is not None:
+
         fields_obj = read_json(Path(fields_path))
-        # if present, merge into form safely
         if "fields" in fields_obj and isinstance(fields_obj["fields"], list):
             form["fields"] = fields_obj["fields"]
 
-    # Light shape checks (fail fast, but still simple)
+
     if "template" not in form or "fields" not in form:
         raise LoadError("form.json must contain 'template' and 'fields' keys.")
     if not isinstance(form["fields"], list):
         raise LoadError("form.fields must be a list.")
+
 
     if "blocks" not in workflow or "links" not in workflow:
         raise LoadError("workflow.json must contain 'blocks' and 'links' keys.")
@@ -53,7 +56,7 @@ def load_input_json(offering_path : str | Path ,
 
         
 
-# json file where it is go "they act as bridge between the logic and Ivanti system"
+# json file where it is go "they act as bridge between the  my output logic (json files) with Ivanti system"
 
 def load_tenant_config(tenant_config_path: str | Path) -> Dict[str , Any]: 
     """

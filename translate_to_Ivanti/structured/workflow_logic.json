@@ -134,7 +134,8 @@
       "id": "B8",
       "type": "stop",
       "title": "Stop",
-      "properties": {}
+      "properties": {},
+      "exits": []
     },
     {
       "id": "B9",
@@ -185,21 +186,6 @@
       "to": "B5"
     },
     {
-      "from": "B5",
-      "exit": "approved",
-      "to": "B6"
-    },
-    {
-      "from": "B6",
-      "exit": "ok",
-      "to": "B7"
-    },
-    {
-      "from": "B7",
-      "exit": "ok",
-      "to": "B8"
-    },
-    {
       "from": "B4",
       "exit": "denied",
       "to": "B9"
@@ -218,6 +204,36 @@
       "from": "B4",
       "exit": "noapprovers",
       "to": "B9"
+    },
+    {
+      "from": "B5",
+      "exit": "approved",
+      "to": "B6"
+    },
+    {
+      "from": "B5",
+      "exit": "denied",
+      "to": "B9"
+    },
+    {
+      "from": "B5",
+      "exit": "cancelled",
+      "to": "B9"
+    },
+    {
+      "from": "B5",
+      "exit": "timedout",
+      "to": "B9"
+    },
+    {
+      "from": "B5",
+      "exit": "noapprovers",
+      "to": "B9"
+    },
+    {
+      "from": "B6",
+      "exit": "ok",
+      "to": "B7"
     },
     {
       "from": "B9",
@@ -272,7 +288,7 @@
     }
   ],
   "version": "1.0.0",
-  "generated_at": "2025-11-03T12:10:12.894537+00:00",
+  "generated_at": "2025-11-17T12:25:24.214273+00:00",
   "source_docs": [
     "Request Offering BRD.docx"
   ]

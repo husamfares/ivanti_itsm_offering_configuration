@@ -84,7 +84,7 @@ def load_retriever(kb_path: str, collection: str = "ivanti_kb", k: int = 12):
         persist_directory=kb_path
     )
     return vs.as_retriever(
-        search_type="mmr",
+        search_type="mmr", 
         search_kwargs={"k": k, "fetch_k": 80, "lambda_mult": 0.2}
         )
 
@@ -106,7 +106,7 @@ def get_context(retriever, queries, max_docs=20):
         if len(uniq) >= max_docs:
             break
 
-    parts = []
+    parts = [] # so this for make header or explain number page as example for the LLM later
     for d in uniq:
         src = d.metadata.get("source")
         page = d.metadata.get("page")
@@ -195,20 +195,20 @@ def json_only(text: str):
 
 
 def minimal_normalize_offering(offering: dict) -> dict:
-    # Ensure shapes exist (no retries, no merging)
+    # set default data if those missing values
     offering.setdefault("publishing_scope", {"mode": "", "groups": [], "users": []})
     offering.setdefault("user_permissions", {"can_cancel": False, "can_edit": False})
 
-    # Coerce delivery_target_days to int if it came as text
+    
     dt = offering.get("delivery_target_days")
     if isinstance(dt, str):
         import re
         m = re.search(r"\d+", dt)
-        offering["delivery_target_days"] = int(m.group()) if m else 0
-    elif not isinstance(dt, int):
+        offering["delivery_target_days"] = int(m.group()) if m else 0  # check if it return text move it to int on delivery_target_days
         offering["delivery_target_days"] = 0
 
-    # Preserve your validation behavior: mark what’s missing
+    
+    # here to validate if there missing value put them into missing list
     missing = [k for k in ("catalog_item_name", "description", "category")
                if not (offering.get(k) or "").strip()]
     if missing:
@@ -217,6 +217,8 @@ def minimal_normalize_offering(offering: dict) -> dict:
         offering.pop("missing_fields", None)
 
     return offering
+
+
 
 
 def create_structure_json(kb_path="kb/chroma_ivanti", out_dir="structured", k=10, model="gpt-4o-mini"):
@@ -449,25 +451,25 @@ def create_structure_json(kb_path="kb/chroma_ivanti", out_dir="structured", k=10
         'exact:"User Ability to Cancel"',
         'exact:"User Ability to Edit"',
         'exact:"Publish to"',
-        # Common variants
+        
         "Self Service category",
         "publishing scope visibility",
         "audience scope",
         "SLA business days delivery timeframe",
-        # High-signal narrative anchors
+        
         "Request Offering",
         "Overview", "Purpose", "Summary",
         "Description :", "Category :",
-        # Nearby sections (sometimes co-located)
+        
         "Requester Details", "Request Details",
-        # Safety net
+        
         "All users specific groups specific users"
     ]
 
 
 
     base_fields = [
-        # Field tables often use these exact labels
+        
         'exact:"Field internal name"',
         'exact:"Field display name"',
         'exact:"Field description"',
@@ -481,10 +483,10 @@ def create_structure_json(kb_path="kb/chroma_ivanti", out_dir="structured", k=10
         'exact:"Validation list RecID"',
         'exact:"Validation constraints"',
         'exact:"Sequence/Order"',
-        # BRD section anchors that precede field rows
+        
         "Requester Details",
         "Request Details",
-        # High-signal field names from your BRD
+        
         'exact:"Submit on behalf"',
         'exact:"Employee ID"',
         'exact:"Full Name"',
@@ -501,12 +503,12 @@ def create_structure_json(kb_path="kb/chroma_ivanti", out_dir="structured", k=10
         'exact:"Office Number"',
         'exact:"Notes"',
         'exact:"Attachments"',
-        # Options/choices lines that often appear below field names
+        
         "Drop down list options choices values",
         "Enable Port Disable Port",
         "Riyadh - Digital City",
         "Jeddah Makkah Yanbu Haql Tabuk Arar Jubail Dammam Sulyyil",
-        # Conditional logic hints
+        
         "required when",
         "visible when",
         "depends on",
@@ -514,28 +516,28 @@ def create_structure_json(kb_path="kb/chroma_ivanti", out_dir="structured", k=10
 
     
     base_workflow = [
-        # Section/row anchors from the BRD
+        
         "Workflow",
         "First Approval",
         "Second Approval",
         "Approval Result",
         "IT Team will be assigned",
         "Fulfill",
-        # Canonical Ivanti workflow block vocabulary (helps map to vote0007/notification/update/stop)
+        
         "Workflow blocks start stop update notification if switch join wait task quick action quickaction",
         "Get Approval vote0007 approval exits approved denied cancelled timedout",
         "Status transitions changes",
         "Email notifications on submission approval rejection",
-        # Approver semantics
+        
         "approver Line Manager related manager",
         "approver group IT Knowledge group",
         "approval rule all any majority",
         "timeout hours reminder hours",
-        # Status wording in BRD
+        
         "Change Status to Waiting for Approval",
         "Approved",
         "Approval Rejected",
-        # Submission notification phrasing
+        
         "Notify Requester of Submission",
         "ticket number email",
         "Change Status to Waiting for Approval",
@@ -609,6 +611,7 @@ def create_structure_json(kb_path="kb/chroma_ivanti", out_dir="structured", k=10
     
     workflow = json_only(workflow_row)
 
+    # validation if the LLM fail to get notification
     workflow.setdefault("notifications", [])
     needed = {
         "on_submission": "<TEMPLATE_ON_SUBMISSION>",
@@ -621,9 +624,12 @@ def create_structure_json(kb_path="kb/chroma_ivanti", out_dir="structured", k=10
             workflow["notifications"].append({"event": evt, "template": tmpl})
 
 
+    # those like end of the book information
     workflow["version"] = "1.0.0"
     workflow["generated_at"] = datetime.now(timezone.utc).isoformat()
     workflow["source_docs"] = ["Request Offering BRD.docx"]
+
+
     with open(os.path.join(out_dir, "workflow_logic.json"), "w", encoding="utf-8") as f:
         json.dump(workflow, f, ensure_ascii=False, indent=2)
 
@@ -643,9 +649,12 @@ def create_structure_json(kb_path="kb/chroma_ivanti", out_dir="structured", k=10
 
 
 
+    # so this debugging file when LLM ask it self if there missing values from query result on function complete_extract_data
     meta = {"offering_followups": offering_meta, "fields_followups": field_meta, "workflow_followups": workflow_meta}
     with open(os.path.join(out_dir, "_followups_meta.json"), "w", encoding="utf-8") as f:
         json.dump(meta, f, ensure_ascii=False, indent=2)
+
+
 
     print("Wrote:", os.path.join(out_dir, "offering_info.json"))
     print("Wrote:", os.path.join(out_dir, "fields_table.json"))

@@ -1,5 +1,5 @@
 {
-  "CatalogItem": {
+  "template": {
     "catalog_item_name": "Enable/Disable Network Point",
     "description": "",
     "category": "",
@@ -18,7 +18,7 @@
       "category"
     ]
   },
-  "FormFields": [
+  "fields": [
     {
       "internal_name": "submit_on_behalf",
       "display_name": "Submit on behalf",
@@ -31,8 +31,10 @@
       "required_expression": null,
       "visibility_expression": null,
       "validation_list_recid": null,
+      "validation_constraints": null,
       "sequence_number": 1,
-      "options": null
+      "options": null,
+      "notes": null
     },
     {
       "internal_name": "employee_id",
@@ -46,8 +48,10 @@
       "required_expression": "$( submit_on_behalf == true )",
       "visibility_expression": "$( submit_on_behalf == true )",
       "validation_list_recid": null,
+      "validation_constraints": null,
       "sequence_number": 2,
-      "options": null
+      "options": null,
+      "notes": null
     },
     {
       "internal_name": "full_name",
@@ -61,8 +65,10 @@
       "required_expression": null,
       "visibility_expression": null,
       "validation_list_recid": null,
+      "validation_constraints": null,
       "sequence_number": 3,
-      "options": null
+      "options": null,
+      "notes": null
     },
     {
       "internal_name": "login_id",
@@ -76,8 +82,10 @@
       "required_expression": null,
       "visibility_expression": null,
       "validation_list_recid": null,
+      "validation_constraints": null,
       "sequence_number": 4,
-      "options": null
+      "options": null,
+      "notes": null
     },
     {
       "internal_name": "email",
@@ -91,8 +99,10 @@
       "required_expression": null,
       "visibility_expression": null,
       "validation_list_recid": null,
+      "validation_constraints": null,
       "sequence_number": 5,
-      "options": null
+      "options": null,
+      "notes": null
     },
     {
       "internal_name": "line_manager",
@@ -106,8 +116,10 @@
       "required_expression": null,
       "visibility_expression": null,
       "validation_list_recid": null,
+      "validation_constraints": null,
       "sequence_number": 6,
-      "options": null
+      "options": null,
+      "notes": null
     },
     {
       "internal_name": "phone_number",
@@ -121,8 +133,10 @@
       "required_expression": null,
       "visibility_expression": null,
       "validation_list_recid": null,
+      "validation_constraints": null,
       "sequence_number": 7,
-      "options": null
+      "options": null,
+      "notes": null
     },
     {
       "internal_name": "extension",
@@ -136,8 +150,10 @@
       "required_expression": null,
       "visibility_expression": null,
       "validation_list_recid": null,
+      "validation_constraints": null,
       "sequence_number": 8,
-      "options": null
+      "options": null,
+      "notes": null
     },
     {
       "internal_name": "service_type",
@@ -151,11 +167,13 @@
       "required_expression": null,
       "visibility_expression": null,
       "validation_list_recid": null,
+      "validation_constraints": null,
       "sequence_number": 9,
       "options": [
         "Enable Port",
         "Disable Port"
-      ]
+      ],
+      "notes": null
     },
     {
       "internal_name": "domain_name",
@@ -169,13 +187,15 @@
       "required_expression": null,
       "visibility_expression": "$(false)",
       "validation_list_recid": null,
+      "validation_constraints": null,
       "sequence_number": 10,
       "options": [
         "Lan A",
         "Lan C",
         "PSS",
         "NIC"
-      ]
+      ],
+      "notes": "Hidden for non-AD scenarios."
     },
     {
       "internal_name": "label_number",
@@ -189,8 +209,10 @@
       "required_expression": null,
       "visibility_expression": null,
       "validation_list_recid": null,
+      "validation_constraints": null,
       "sequence_number": 11,
-      "options": null
+      "options": null,
+      "notes": null
     },
     {
       "internal_name": "location",
@@ -204,6 +226,7 @@
       "required_expression": null,
       "visibility_expression": null,
       "validation_list_recid": null,
+      "validation_constraints": null,
       "sequence_number": 12,
       "options": [
         "Riyadh - Digital City",
@@ -217,7 +240,8 @@
         "Jubail",
         "Dammam",
         "Sulyyil"
-      ]
+      ],
+      "notes": null
     },
     {
       "internal_name": "building_name",
@@ -231,8 +255,10 @@
       "required_expression": null,
       "visibility_expression": null,
       "validation_list_recid": null,
+      "validation_constraints": null,
       "sequence_number": 13,
-      "options": null
+      "options": null,
+      "notes": null
     },
     {
       "internal_name": "office_number",
@@ -246,8 +272,10 @@
       "required_expression": null,
       "visibility_expression": null,
       "validation_list_recid": null,
+      "validation_constraints": null,
       "sequence_number": 14,
-      "options": null
+      "options": null,
+      "notes": null
     },
     {
       "internal_name": "notes",
@@ -261,8 +289,10 @@
       "required_expression": null,
       "visibility_expression": null,
       "validation_list_recid": null,
+      "validation_constraints": null,
       "sequence_number": 15,
-      "options": null
+      "options": null,
+      "notes": null
     },
     {
       "internal_name": "attachments",
@@ -276,8 +306,16 @@
       "required_expression": null,
       "visibility_expression": null,
       "validation_list_recid": null,
+      "validation_constraints": null,
       "sequence_number": 16,
-      "options": null
+      "options": null,
+      "notes": null
     }
+  ],
+  "delivery_items": null,
+  "version": "1.0.0",
+  "generated_at": "2025-11-17T12:25:24.215317+00:00",
+  "source_docs": [
+    "Request Offering BRD.docx"
   ]
 }
